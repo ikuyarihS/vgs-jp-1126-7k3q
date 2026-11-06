@@ -96,8 +96,11 @@ details .lnk{padding:0 var(--s2) var(--s1)}
 .btn{min-height:44px;border-radius:12px;background:var(--white);border:1px solid var(--n200);color:var(--brand-500);text-decoration:none;display:grid;place-items:center;font-weight:600;font-size:14px}
 .btn:hover{background:var(--brand-50)}
 .common{background:var(--white);border-radius:var(--r);padding:var(--s3);box-shadow:var(--shadow-card);margin-top:var(--s2)}
-#common{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 var(--s3)}
-#common a{font-size:15px;border-bottom:1px solid var(--n100)}
+#giayto,#chung{scroll-margin-top:140px}
+.head .pills{display:flex;gap:8px}
+@media(max-width:480px){.head .pill{padding:0 12px;font-size:13px}}
+#common,#giaytoL{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 var(--s3)}
+#common a,#giaytoL a{font-size:15px;border-bottom:1px solid var(--n100)}
 footer{text-align:center;font-size:14px;padding:var(--s5) 72px 80px}
 .help+.sub{margin-top:var(--s2)}
 .empty{text-align:center;padding:var(--s4);font-size:16px}
@@ -121,7 +124,7 @@ footer{text-align:center;font-size:14px;padding:var(--s5) 72px 80px}
 <path d="M61.9581 32.355L51.7048 11.6443H57.0328L64.3798 26.21H64.4499L71.3359 11.6443H76.693L66.7666 32.355H61.9581Z" fill-rule="evenodd" clip-rule="evenodd" fill="#0047BB"/>
 <path d="M149.796 16.0096V11.6445H171.557V16.0096H163.125V32.3552H157.925V16.0096H149.796Z" fill="#0047BB" stroke-width="0.262604" stroke="#0047BB"/>
 <path d="M136.479 11.6445C137.903 11.6562 139.105 11.8429 140.115 12.2106C141.154 12.5899 141.994 13.0859 142.636 13.7045C143.295 14.3231 143.774 15.035 144.066 15.8229C144.369 16.6223 144.509 17.4452 144.509 18.2972C144.509 19.1258 144.369 19.9428 144.066 20.7481C143.774 21.5535 143.295 22.2654 142.653 22.884C141.994 23.5026 141.154 24.0044 140.115 24.3779C139.082 24.7572 137.833 24.944 136.351 24.944H128.035V32.3552H122.818V11.6445H136.479ZM134.933 21.4134C135.528 21.4134 136.106 21.3725 136.654 21.2967C137.203 21.2208 137.693 21.0691 138.113 20.8473C138.522 20.6198 138.86 20.3046 139.117 19.8961C139.38 19.4876 139.491 18.9566 139.491 18.2972C139.491 17.6319 139.38 17.1009 139.117 16.6924C138.86 16.2839 138.522 15.9687 138.113 15.747C137.693 15.5194 137.203 15.3735 136.654 15.2976C136.106 15.2159 135.528 15.1751 134.933 15.1751H128.035V21.4134H134.933Z" fill-rule="evenodd" clip-rule="evenodd" fill="#0047BB" stroke-width="0.262604" stroke="#0047BB"/>
-</svg><a class="pill" href="#giayto">Giấy tờ</a> <a class="pill" href="#chung">Tài liệu chung</a></div></header>
+</svg><span class="pills"><a class="pill" href="#giayto">Giấy tờ</a><a class="pill" href="#chung">Tài liệu chung</a></span></div></header>
 <section class="hero"><div class="wrap"><div>
 <h1>Công tác Nhật Bản<span>Tháng 11/2026</span></h1>
 <p class="lead">Lịch làm việc và tài liệu của từng buổi gặp. Chạm vào EN (tiếng Anh), JP (tiếng Nhật) hoặc VI (tiếng Việt) để mở tài liệu.</p>
