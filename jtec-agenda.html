@@ -51,8 +51,9 @@
   {"day": "2026-11-09", "start": "10:00", "end": "10:10", "title": "Phát biểu chỉ đạo của Tổng Bí thư, Chủ tịch nước Tô Lâm"},
   {"day": "2026-11-09", "start": "10:10", "end": "10:27", "tag": "VNPT", "hl": true,
    "title": "Lễ trao các văn kiện hợp tác",
-   "detail": "Với sự chứng kiến của Tổng Bí thư, Chủ tịch nước Tô Lâm và Lãnh đạo cấp cao hai nước. 6 nhóm trao gồm: (i) Thỏa thuận đồng tài trợ 11 dự án khoa học công nghệ; (ii) 55 văn kiện hợp tác. Từng nhóm lên lần lượt. VNPT: nhóm 3, số 20 VNPT - Rakuten Symphony (số 21 Poststep); nhóm 5, số 44 VNPT - Hibiya Engineering, số 45 VNPT - Tomofarm. Chỉ đọc tên doanh nghiệp, không đọc tên người lên trao; tổng thời gian trao khoảng 17 phút. Vị trí đứng: người Việt Nam đứng bên tay trái (nhìn từ dưới lên là bên tay phải), chốt cuối sáng 09/11. Phía Nhật trao cùng: các Bộ trưởng."},
-  {"day": "2026-11-09", "start": "10:27", "end": "10:30", "title": "Lễ công bố năm hợp tác du lịch Việt Nam - Nhật Bản 2027 - 2028", "detail": "Bộ Văn hoá, Thể thao và Du lịch."},
+   "detail": "Tổng Bí thư, Chủ tịch nước Tô Lâm và Lãnh đạo cấp cao hai nước chứng kiến. 6 nhóm: 11 dự án KHCN đồng tài trợ và 55 văn kiện hợp tác.",
+   "turns": [["3", "20", "VNPT - Rakuten Symphony", true], ["3", "21", "Poststep", false], ["5", "44", "VNPT - Hibiya Engineering", true], ["5", "45", "VNPT - Tomofarm", true]],
+   "notes": ["Từng nhóm lên lần lượt, cả phần trao khoảng 17 phút.", "Chỉ đọc tên doanh nghiệp, không đọc tên người trao.", "Người Việt Nam đứng bên trái (nhìn từ khán phòng: bên phải). Chốt cuối sáng 09/11.", "Phía Nhật trao cùng: các Bộ trưởng."]},  {"day": "2026-11-09", "start": "10:27", "end": "10:30", "title": "Lễ công bố năm hợp tác du lịch Việt Nam - Nhật Bản 2027 - 2028", "detail": "Bộ Văn hoá, Thể thao và Du lịch."},
   {"day": "2026-11-09", "start": "10:30", "end": "10:30", "title": "Tổng Bí thư, Chủ tịch nước Tô Lâm và Lãnh đạo hai nước rời Hội trường"},
   {"day": "2026-11-09", "start": "10:30", "end": "12:00", "title": "Phiên kết nối các doanh nghiệp, viện, trường Việt Nam và Nhật Bản"},
   {"day": "2026-11-09", "start": "12:00", "end": "12:00", "title": "Kết thúc Diễn đàn"}
@@ -118,6 +119,14 @@ ol.items{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .it h3{font-size:17px;line-height:1.35;color:var(--n900);font-weight:650;text-wrap:pretty}
 .it p{font-size:15px;margin-top:4px;text-wrap:pretty}
 .it .wh{color:var(--n700)}
+.turns{border-collapse:collapse;margin-top:10px;font-size:15px;font-variant-numeric:tabular-nums}
+.turns caption{text-align:left;font-weight:650;color:var(--n900);padding-bottom:4px}
+.turns th{font-size:13px;font-weight:600;color:var(--n700);text-align:left;padding:2px 14px 4px 0}
+.turns td{padding:5px 14px 5px 0;border-top:1px solid var(--n100);color:var(--n700)}
+.turns tr.me td{color:var(--n900);font-weight:650}
+.turns tr.me td:last-child{color:var(--brand-900)}
+.notes{margin:10px 0 0;padding-left:20px;font-size:15px}
+.notes li{margin-top:3px}
 .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--brand-100);color:var(--brand-900);vertical-align:2px;margin-left:6px}
 .tag.JTEC{background:var(--brand-900);color:var(--white)}
 .badge{display:inline-block;margin-top:8px;font-size:14px;font-weight:700;padding:3px 10px;border-radius:999px}
@@ -184,6 +193,7 @@ const fmt=(z,n)=>new Intl.DateTimeFormat('en-GB',Object.assign({hour:'2-digit',m
 const dayOf=n=>new Intl.DateTimeFormat('sv-SE',{timeZone:A.tz}).format(n);
 const LOCALTZ=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
 // Each item gets s (start) and e (end) as instants; e for an open end is the next later start that day, else 23:59 that day.
+const det=d=>{const a=d.split(/\s*\((?:i|ii|iii|iv|v|vi|vii)\)\s*/);return a.length<3?`<p>${esc(d)}</p>`:`${a[0]?`<p>${esc(a[0])}</p>`:''}<ul class="notes">${a.slice(1).map(t=>`<li>${esc(t.replace(/[.;]\s*$/,''))}</li>`).join('')}</ul>`};
 const IT=A.items.map((x,i)=>Object.assign({i},x));
 IT.forEach(x=>{if(!x.start)return;x.s=at(x.day,x.start);
  if(x.end){x.e=at(x.day,x.end);if(+x.e===+x.s)x.e=new Date(+x.s+6e4);return}
@@ -202,7 +212,7 @@ const back=(A.links||[]).find(l=>/github\.io/.test(l[1]));if(back)$('back').href
 $('facts').innerHTML=(A.facts||[]).map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
 $('agenda').innerHTML=days.map(d=>`<div class="day"><h2 id="d${d}">${dow(d)} ${dm(d)}<span class="tag" hidden>Hôm nay</span></h2><ol class="items">${IT.filter(x=>x.day===d).map(x=>`<li class="it${x.hl?' hl':''}" id="i${x.i}">
  <div class="tm">${x.start?`<b>${esc(x.start)}</b>${x.end&&x.end!==x.start?`<span>đến ${esc(x.end)}</span>`:x.open?'<span>kết thúc TBC</span>':''}`:'<span class="tbc">TBC</span><span>giờ chưa chốt</span>'}</div>
- <div><h3>${esc(x.title)}${x.tag?`<span class="tag ${esc(x.tag)}">${esc(x.tag)}</span>`:''}</h3>${x.detail?`<p>${esc(x.detail)}</p>`:''}${x.where?`<p class="wh">Địa điểm: ${esc(x.where)}</p>`:''}<span class="badge"></span></div></li>`).join('')}</ol></div>`).join('');
+ <div><h3>${esc(x.title)}${x.tag?`<span class="tag ${esc(x.tag)}">${esc(x.tag)}</span>`:''}</h3>${x.detail?det(x.detail):''}${x.turns?`<table class="turns"><caption>Lượt lên trao</caption><tr><th>Nhóm</th><th>Số</th><th>Văn kiện</th></tr>${x.turns.map(t=>`<tr${t[3]?' class="me"':''}><td>${esc(t[0])}</td><td>${esc(t[1])}</td><td>${esc(t[2])}</td></tr>`).join('')}</table>`:''}${x.notes?`<ul class="notes">${x.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`:''}${x.where?`<p class="wh">Địa điểm: ${esc(x.where)}</p>`:''}<span class="badge"></span></div></li>`).join('')}</ol></div>`).join('');
 const tel=p=>'tel:'+p.replace(/[^+\d]/g,'');
 $('contacts').innerHTML=(A.contacts||[]).map(c=>`<div class="ct"><h3>${esc(c.name)}</h3><div class="rl">${esc(c.role)}</div>${c.phone||c.email?`<div class="acts">${c.phone?`<a href="${esc(tel(c.phone))}">Gọi ${esc(c.phone)}</a>`:''}${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:''}</div>`:''}${c.note?`<p>${esc(c.note)}</p>`:''}</div>`).join('');
 $('links').innerHTML=(A.links||[]).map(([l,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)}</a></li>`).join('');
